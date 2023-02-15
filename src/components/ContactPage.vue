@@ -7,6 +7,7 @@
                     mail: <a href="mailto:caleb@domyjobfor.me" target="__blank">caleb@domyjobfor.me</a><br>
                     github: <a href="https://github.com/carreb" target="__blank">/carreb</a><br>
                     instagram: <a href="https://instagram.com/carreb" target="__blank">@carreb</a><br>
+                    afc related mail: <a href="mailto:caleb@mciafc.com">caleb@mciafc.com</a>
                 </p>
             </div>
         </div>
@@ -26,8 +27,8 @@
     font-size: 2.5rem;
 }
 .section2-more-about-me {
-    width: 600px;
-    height: 600px;
+    width: 450px;
+    height: 450px;
     border-radius: 50%;
     color: white;
     position: relative;
