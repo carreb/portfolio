@@ -86,6 +86,10 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <ContactPage></ContactPage>
 
 
@@ -98,7 +102,7 @@
 <script>
 import { toRaw } from 'vue'
 
-import { ContactPage } from './ContactPage.vue'
+import ContactPage from './ContactPage.vue'
 
     export default {
         name: 'LandingPage',
@@ -326,7 +330,11 @@ import { ContactPage } from './ContactPage.vue'
                     let formats = []
                     for (let i = 0; i < Disc.formats.length; i++) {
                         if (Disc.formats[i].name == "Vinyl") {
-                            formats.push(`${Disc.formats[i].qty}x ${Disc.formats[i].descriptions[0]}, ${Disc.formats[i].descriptions[1]}`)
+                            if (Disc.formats[i].qty > 1) {
+                                formats.push(`${Disc.formats[i].qty}x ${Disc.formats[i].descriptions[0]}, ${Disc.formats[i].descriptions[1]}`)
+                            } else {
+                                formats.push(`${Disc.formats[i].descriptions[0]}, ${Disc.formats[i].descriptions[1]}`)
+                            }
                             if (Disc.formats[i].text != undefined) {
                                 formats.push(Disc.formats[i].text)
                             }
