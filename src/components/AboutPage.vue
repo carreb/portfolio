@@ -17,7 +17,7 @@
                 <span class="subtitle">more about me</span><br><br>
                 i'm {{ new Date().getFullYear() - 2006 }} years old and am currently
                 a student at martingrove collegiate institute. at mci i am a co-president for the <a
-                    href="https://mciafc.com" target="__blank">afc</a> and i typically take the role
+                    href="https://mciafc.com" target="__blank" v-tooltip="'the afc website! i made that! wow!'">afc</a> and i typically take the role
                 of stage manager during productions.
             </p>
         </div>
@@ -25,9 +25,9 @@
     <div class="section3-music">
         <h3 class="subtitle">music</h3>
         <p class="music-section-intro-text">
-            i've been in love with music ever since i was a little kid, the <a href="https://trans-siberian.com" target="__blank">trans-siberian orchestra</a> started playing on the tv and i was absolutely jamming out to it.
+            i've been in love with music ever since i was a little kid, the <a href="https://trans-siberian.com" target="__blank" v-tooltip="'their website'">trans-siberian orchestra</a> started playing on the tv and i was absolutely jamming out to it.
             my parents checked them out, saw that they were touring in toronto soon, and we went. we've been going to their shows every year since.
-            we've gotten to know some of the band members too, which is pretty cool. i have a pretty big collection of drumsticks from the east-side drummer <a href="https://en.wikipedia.org/wiki/Jeff_Plate" target="__blank">jeff plate</a>.
+            we've gotten to know some of the band members too, which is pretty cool. i have a pretty big collection of drumsticks from the east-side drummer <a href="https://en.wikipedia.org/wiki/Jeff_Plate" target="__blank" v-tooltip="'click to view on wikipedia.org'">jeff plate</a>.
             that's all to say that i've been a music lover ever since i was a kid. the next portion of the website will be dedicated to my current favorite albums, artists, and tracks, as well as my lp collection.
         </p>
     </div>
@@ -63,26 +63,26 @@
         <h3 class="sub-subtitle" style="text-align: center;">my vinyl collection</h3>
         <p class="discogs-value-text" v-if="this.musicData.collectionValue != undefined">{{ this.musicData.collectionValue.minimum.substring(2) }} minimum - {{ this.musicData.collectionValue.median.substring(2) }} median - {{ this.musicData.collectionValue.maximum.substring(2) }} maximum</p>
         <div class="flex-discogs-items">
-            <div class="most-recently-added discogs-section" @click="openDiscogs(musicData.collection.releases[musicData.collection.releases.length - 1])">
+            <div class="most-recently-added discogs-section" @click="openDiscogs(musicData.collection.releases[musicData.collection.releases.length - 1])" v-tooltip="'click to view on discogs.com'">
                 <h4 class="sub-subtitle music">newest addition</h4>
                 <img :src="musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[musicData.collection.releases.length - 1].basic_information) }}</h6>
-                <h7 class="discogs-year">{{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.year }}</h7>
+                <h7 class="discogs-year">Released {{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.year }}</h7>
             </div>
-            <div class="random-disc-1 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber1])">
+            <div class="random-disc-1 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber1])" v-tooltip="'click to view on discogs.com'">
                 <h4 class="sub-subtitle music">random disc</h4>
                 <img :src="musicData.collection.releases[randomDiscNumber1].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber1].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[randomDiscNumber1].basic_information) }}</h6>
-                <h7 class="discogs-year">{{ musicData.collection.releases[randomDiscNumber1].basic_information.year }}</h7>
+                <h7 class="discogs-year">Released {{ musicData.collection.releases[randomDiscNumber1].basic_information.year }}</h7>
             </div>
-            <div class="random-disc-2 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber2])">
+            <div class="random-disc-2 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber2])" v-tooltip="'click to view on discogs.com'">
                 <h4 class="sub-subtitle music">random disc</h4>
                 <img :src="musicData.collection.releases[randomDiscNumber2].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber2].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[randomDiscNumber2].basic_information) }}</h6>
-                <h7 class="discogs-year">{{ musicData.collection.releases[randomDiscNumber2].basic_information.year }}</h7>
+                <h7 class="discogs-year">Released {{ musicData.collection.releases[randomDiscNumber2].basic_information.year }}</h7>
             </div>
         </div>
     </div>
@@ -367,6 +367,7 @@ import ContactPage from './ContactPage.vue'
 </script>
 
 <style lang="css" scoped>
+
 .top-content-introduction {
         text-align: center;
         margin-top: 0;
