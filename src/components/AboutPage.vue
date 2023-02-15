@@ -36,23 +36,23 @@
         <div class="flex-recent-lastfm-data" v-if="this.musicData.albums != undefined">
             <div class="albums unselectable">
                 <h4 class="sub-subtitle music">album</h4>
-                <img v-if="getAlbumImage(0) != 'Loading'" :src="getAlbumImage(0)" alt="">
-                <h5 class="album-albumname">{{ getAlbumName(0) }}</h5>
-                <h6 class="album-artistname">{{ getAlbumArtist(0) }}</h6>
-                <h7 class="album-plays">{{ getAlbumPlays(0) }} plays this week</h7>
+                <img v-if="getAlbumImage(0) != 'Loading'" :src="getAlbumImage(0, musicData)" alt="">
+                <h5 class="album-albumname">{{ getAlbumName(0, musicData) }}</h5>
+                <h6 class="album-artistname">{{ getAlbumArtist(0, musicData) }}</h6>
+                <h7 class="album-plays">{{ getAlbumPlays(0, musicData) }} plays this week</h7>
             </div>
             <div class="artists unselectable">
                 <h4 class="sub-subtitle music">artist</h4>
                 <img :src="artistImage" class="artistImage">
-                <h5 class="artist-artistname">{{ getArtistName(0) }}</h5>
-                <h6 class="artist-plays">{{ getArtistPlays(0) }} plays this week</h6>
+                <h5 class="artist-artistname">{{ getArtistName(0, musicData) }}</h5>
+                <h6 class="artist-plays">{{ getArtistPlays(0, musicData) }} plays this week</h6>
             </div>
             <div class="tracks unselectable">
                 <h4 class="sub-subtitle music">track</h4>
                 <img :src="this.trackImage" class="trackImage">
-                <h5 class="track-trackname">{{ getTrackName(0) }}</h5>
-                <h6 class="track-artistname">{{ getTrackArtist(0) }}</h6>
-                <h7 class="track-plays">{{ getTrackPlays(0) }} plays this week</h7>
+                <h5 class="track-trackname">{{ getTrackName(0, musicData) }}</h5>
+                <h6 class="track-artistname">{{ getTrackArtist(0, musicData) }}</h6>
+                <h7 class="track-plays">{{ getTrackPlays(0, musicData) }} plays this week</h7>
             </div>
         </div>
         <div v-else>
@@ -240,49 +240,49 @@ import { ContactPage } from './ContactPage.vue'
         },
         computed: {
             getAlbumImage() {
-                return function(num) {
-                    if (this.musicData.albums != undefined) {
-                        return this.musicData.albums.topalbums.album[num].image[3]["#text"];
+                return function(num, data) {
+                    if (data.albums != undefined) {
+                        return data.albums.topalbums.album[num].image[3]["#text"];
                     }
                     return "Loading"
                 }
             },
             getAlbumName() {
-                return function(num) {
-                    if (this.musicData.albums != undefined) {
-                        return this.musicData.albums.topalbums.album[num].name;
+                return function(num, data) {
+                    if (data.albums != undefined) {
+                        return data.albums.topalbums.album[num].name;
                     }
                     return "Loading"
                 }
             },
             getAlbumArtist() {
-                return function(num) {
-                    if (this.musicData.albums != undefined) {
-                        return this.musicData.albums.topalbums.album[num].artist.name;
+                return function(num, data) {
+                    if (data.albums != undefined) {
+                        return data.albums.topalbums.album[num].artist.name;
                     }
                     return "Loading"
                 }
             },
             getAlbumPlays() {
-                return function(num) {
-                    if (this.musicData.albums != undefined) {
-                        return this.musicData.albums.topalbums.album[num].playcount;
+                return function(num, data) {
+                    if (data.albums != undefined) {
+                        return data.albums.topalbums.album[num].playcount;
                     }
                     return "Loading"
                 }
             },
             getArtistName() {
-                return function(num) {
-                    if (this.musicData.artists != undefined) {
-                        return this.musicData.artists.topartists.artist[num].name;
+                return function(num, data) {
+                    if (data.artists != undefined) {
+                        return data.artists.topartists.artist[num].name;
                     }
                     return "Loading"
                 }
             },
             getArtistPlays() {
-                return function(num) {
-                    if (this.musicData.artists != undefined) {
-                        return this.musicData.artists.topartists.artist[num].playcount;
+                return function(num, data) {
+                    if (data.artists != undefined) {
+                        return data.artists.topartists.artist[num].playcount;
                     }
                     return "Loading"
                 }
@@ -293,25 +293,25 @@ import { ContactPage } from './ContactPage.vue'
                 }
             },
             getTrackName() {
-                return function(num) {
-                    if (this.musicData.tracks != undefined) {
-                        return this.musicData.tracks.toptracks.track[num].name;
+                return function(num, data) {
+                    if (data.tracks != undefined) {
+                        return data.tracks.toptracks.track[num].name;
                     }
                     return "Loading"
                 }
             },
             getTrackArtist() {
-                return function(num) {
-                    if (this.musicData.tracks != undefined) {
-                        return this.musicData.tracks.toptracks.track[num].artist.name;
+                return function(num, data) {
+                    if (data.tracks != undefined) {
+                        return data.tracks.toptracks.track[num].artist.name;
                     }
                     return "Loading"
                 }
             },
             getTrackPlays() {
-                return function(num) {
-                    if (this.musicData.tracks != undefined) {
-                        return this.musicData.tracks.toptracks.track[num].playcount;
+                return function(num, data) {
+                    if (data.tracks != undefined) {
+                        return data.tracks.toptracks.track[num].playcount;
                     }
                     return "Loading"
                 }
