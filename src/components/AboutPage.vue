@@ -63,21 +63,21 @@
         <h3 class="sub-subtitle" style="text-align: center;">my vinyl collection</h3>
         <p class="discogs-value-text" v-if="this.musicData.collectionValue != undefined">{{ this.musicData.collectionValue.minimum.substring(2) }} minimum - {{ this.musicData.collectionValue.median.substring(2) }} median - {{ this.musicData.collectionValue.maximum.substring(2) }} maximum</p>
         <div class="flex-discogs-items">
-            <div class="most-recently-added discogs-section">
+            <div class="most-recently-added discogs-section" @click="openDiscogs(musicData.collection.releases[musicData.collection.releases.length - 1])">
                 <h4 class="sub-subtitle music">newest addition</h4>
                 <img :src="musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[musicData.collection.releases.length - 1].basic_information) }}</h6>
                 <h7 class="discogs-year">{{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.year }}</h7>
             </div>
-            <div class="random-disc-1 discogs-section">
+            <div class="random-disc-1 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber1])">
                 <h4 class="sub-subtitle music">random disc</h4>
                 <img :src="musicData.collection.releases[randomDiscNumber1].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber1].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[randomDiscNumber1].basic_information) }}</h6>
                 <h7 class="discogs-year">{{ musicData.collection.releases[randomDiscNumber1].basic_information.year }}</h7>
             </div>
-            <div class="random-disc-2 discogs-section">
+            <div class="random-disc-2 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber2])">
                 <h4 class="sub-subtitle music">random disc</h4>
                 <img :src="musicData.collection.releases[randomDiscNumber2].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber2].basic_information.title }}</h5>
@@ -230,6 +230,13 @@ import { ContactPage } from './ContactPage.vue'
                         this.musicDataLoaded += 1;
                     })
             },
+            openDiscogs(disc) {
+                // trim out the "api" part of the url
+                disc.basic_information.resource_url = disc.basic_information.resource_url.replace("api.", "");
+                // change releases to release in url
+                disc.basic_information.resource_url = disc.basic_information.resource_url.replace("releases", "release");
+                window.open(disc.basic_information.resource_url, '_blank');
+            }
         },
         computed: {
             getAlbumImage() {
@@ -375,6 +382,7 @@ import { ContactPage } from './ContactPage.vue'
     }
     .discogs-section {
         width: 300px;
+        cursor: pointer;
     }
 
     .discogs-image {
