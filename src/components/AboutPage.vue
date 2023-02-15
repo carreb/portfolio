@@ -36,7 +36,7 @@
         <div class="flex-recent-lastfm-data" v-if="this.musicData.albums != undefined">
             <div class="albums unselectable">
                 <h4 class="sub-subtitle music">album</h4>
-                <img v-if="getAlbumImage(0) != 'Loading'" :src="getAlbumImage(0, musicData)" alt="">
+                <img v-if="getAlbumImage(0, musicData) != 'Loading'" :src="getAlbumImage(0, musicData)" alt="">
                 <h5 class="album-albumname">{{ getAlbumName(0, musicData) }}</h5>
                 <h6 class="album-artistname">{{ getAlbumArtist(0, musicData) }}</h6>
                 <h7 class="album-plays">{{ getAlbumPlays(0, musicData) }} plays this week</h7>
@@ -240,49 +240,49 @@ import { ContactPage } from './ContactPage.vue'
         },
         computed: {
             getAlbumImage() {
-                return function(num, data) {
-                    if (data.albums != undefined) {
-                        return data.albums.topalbums.album[num].image[3]["#text"];
+                return function(num, MusicData) {
+                    if (MusicData.albums != undefined) {
+                        return MusicData.albums.topalbums.album[num].image[3]["#text"];
                     }
                     return "Loading"
                 }
             },
             getAlbumName() {
-                return function(num, data) {
-                    if (data.albums != undefined) {
-                        return data.albums.topalbums.album[num].name;
+                return function(num, MusicData) {
+                    if (MusicData.albums != undefined) {
+                        return MusicData.albums.topalbums.album[num].name;
                     }
                     return "Loading"
                 }
             },
             getAlbumArtist() {
-                return function(num, data) {
-                    if (data.albums != undefined) {
-                        return data.albums.topalbums.album[num].artist.name;
+                return function(num, MusicData) {
+                    if (MusicData.albums != undefined) {
+                        return MusicData.albums.topalbums.album[num].artist.name;
                     }
                     return "Loading"
                 }
             },
             getAlbumPlays() {
-                return function(num, data) {
-                    if (data.albums != undefined) {
-                        return data.albums.topalbums.album[num].playcount;
+                return function(num, MusicData) {
+                    if (MusicData.albums != undefined) {
+                        return MusicData.albums.topalbums.album[num].playcount;
                     }
                     return "Loading"
                 }
             },
             getArtistName() {
-                return function(num, data) {
-                    if (data.artists != undefined) {
-                        return data.artists.topartists.artist[num].name;
+                return function(num, MusicData) {
+                    if (MusicData.artists != undefined) {
+                        return MusicData.artists.topartists.artist[num].name;
                     }
                     return "Loading"
                 }
             },
             getArtistPlays() {
-                return function(num, data) {
-                    if (data.artists != undefined) {
-                        return data.artists.topartists.artist[num].playcount;
+                return function(num, MusicData) {
+                    if (MusicData.artists != undefined) {
+                        return MusicData.artists.topartists.artist[num].playcount;
                     }
                     return "Loading"
                 }
@@ -293,25 +293,25 @@ import { ContactPage } from './ContactPage.vue'
                 }
             },
             getTrackName() {
-                return function(num, data) {
-                    if (data.tracks != undefined) {
-                        return data.tracks.toptracks.track[num].name;
+                return function(num, MusicData) {
+                    if (MusicData.tracks != undefined) {
+                        return MusicData.tracks.toptracks.track[num].name;
                     }
                     return "Loading"
                 }
             },
             getTrackArtist() {
-                return function(num, data) {
-                    if (data.tracks != undefined) {
-                        return data.tracks.toptracks.track[num].artist.name;
+                return function(num, MusicData) {
+                    if (MusicData.tracks != undefined) {
+                        return MusicData.tracks.toptracks.track[num].artist.name;
                     }
                     return "Loading"
                 }
             },
             getTrackPlays() {
-                return function(num, data) {
-                    if (data.tracks != undefined) {
-                        return data.tracks.toptracks.track[num].playcount;
+                return function(num, MusicData) {
+                    if (MusicData.tracks != undefined) {
+                        return MusicData.tracks.toptracks.track[num].playcount;
                     }
                     return "Loading"
                 }
