@@ -31,7 +31,7 @@
             that's all to say that i've been a music lover ever since i was a kid. the next portion of the website will be dedicated to my current favorite albums, artists, and tracks, as well as my lp collection.
         </p>
     </div>
-    <div v-if="musicDataLoaded" class="section4-music-liveapi">
+    <div v-if="musicDataLoaded > 0" class="section4-music-liveapi">
         <h3 class="sub-subtitle recently-ive-been-listening-to">recently i've been listening to:</h3>
         <div class="flex-recent-lastfm-data" v-if="this.musicData.albums != undefined">
             <div class="albums unselectable">
@@ -47,23 +47,77 @@
                 <h5 class="artist-artistname">{{ getArtistName(0) }}</h5>
                 <h6 class="artist-plays">{{ getArtistPlays(0) }} plays this week</h6>
             </div>
+            <div class="tracks unselectable">
+                <h4 class="sub-subtitle music">track</h4>
+                <img :src="this.trackImage" class="trackImage">
+                <h5 class="track-trackname">{{ getTrackName(0) }}</h5>
+                <h6 class="track-artistname">{{ getTrackArtist(0) }}</h6>
+                <h7 class="track-plays">{{ getTrackPlays(0) }} plays this week</h7>
+            </div>
+        </div>
+        <div v-else>
+            <h1 style="text-align: center;">[loading last.fm data]</h1>
         </div>
     </div>
+    <div class="section5-discogs-collection" v-if="musicDataLoaded > 0">
+        <h3 class="sub-subtitle" style="text-align: center;">my vinyl collection</h3>
+        <p class="discogs-value-text" v-if="this.musicData.collectionValue != undefined">{{ this.musicData.collectionValue.minimum.substring(2) }} minimum - {{ this.musicData.collectionValue.median.substring(2) }} median - {{ this.musicData.collectionValue.maximum.substring(2) }} maximum</p>
+        <div class="flex-discogs-items">
+            <div class="most-recently-added discogs-section">
+                <h4 class="sub-subtitle music">newest addition</h4>
+                <img :src="musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.cover_image" class="discogs-image">
+                <h5 class="discogs-albumname">{{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.title }}</h5>
+                <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[musicData.collection.releases.length - 1].basic_information) }}</h6>
+                <h7 class="discogs-year">{{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.year }}</h7>
+            </div>
+            <div class="random-disc-1 discogs-section">
+                <h4 class="sub-subtitle music">random disc</h4>
+                <img :src="musicData.collection.releases[randomDiscNumber1].basic_information.cover_image" class="discogs-image">
+                <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber1].basic_information.title }}</h5>
+                <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[randomDiscNumber1].basic_information) }}</h6>
+                <h7 class="discogs-year">{{ musicData.collection.releases[randomDiscNumber1].basic_information.year }}</h7>
+            </div>
+            <div class="random-disc-2 discogs-section">
+                <h4 class="sub-subtitle music">random disc</h4>
+                <img :src="musicData.collection.releases[randomDiscNumber2].basic_information.cover_image" class="discogs-image">
+                <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber2].basic_information.title }}</h5>
+                <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[randomDiscNumber2].basic_information) }}</h6>
+                <h7 class="discogs-year">{{ musicData.collection.releases[randomDiscNumber2].basic_information.year }}</h7>
+            </div>
+        </div>
+    </div>
+    <ContactPage></ContactPage>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
 </template>
 
 <script>
-    import { toRaw } from 'vue'
+import { toRaw } from 'vue'
+
+import { ContactPage } from './ContactPage.vue'
 
     export default {
         name: 'LandingPage',
         data() {
             return {
                 musicData: {},
-                musicDataLoaded: -2,
-                artistImage: 'Loading',
+                musicDataLoaded: -4,
+                artistImage: '',
+                trackImage: '',
+                randomDiscNumber1: 0,
+                randomDiscNumber2: 0,
                 lastfmKey: process.env.VUE_APP_LASTFM_KEY,
-                spotifyKey: process.env.VUE_APP_SPOTIFY_KEY
+                spotifyKey: process.env.VUE_APP_SPOTIFY_KEY,
+                spotifyClientId: process.env.VUE_APP_SPOTIFY_CLIENT_ID,
+                spotifyClientSecret: process.env.VUE_APP_SPOTIFY_CLIENT_SECRET
             }
+        },
+        components: {
+            ContactPage,
         },
         mounted() {
             this.getMusicData();
@@ -80,10 +134,25 @@
                             fetch(`https://api.spotify.com/v1/search?q=${artistName}&type=artist&limit=1`, {
                             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.spotifyKey}` }
                             })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log(data)
-                                this.artistImage = data.artists.items[0].images[0].url.toString();
+                            .then(async (res) => {
+                                let data = await res.json();
+                                if (res.status != 401) {
+                                    console.log(data)
+                                    console.log(data.artists.items[0].images[0].url.toString())
+                                    this.artistImage = data.artists.items[0].images[0].url.toString();
+                                } else {
+                                    // request a new token using client credentials flow
+                                    fetch(`https://accounts.spotify.com/api/token`, {
+                                        headers: { "Content-Type": "application/x-www-form-urlencoded", Authorization: `Basic ${btoa(this.spotifyClientId + ":" + this.spotifyClientSecret)}` },
+                                        body: "grant_type=client_credentials",
+                                        method: "POST"
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        this.spotifyKey = data.access_token;
+                                        return this.getMusicData()
+                                    })
+                                }
                             })
                         this.musicDataLoaded += 1;
                     })
@@ -93,6 +162,29 @@
                     .then(data => {
                         this.musicData.tracks = data;
                         console.log(toRaw(this.musicData.tracks))
+                        let trackName = this.musicData.tracks.toptracks.track[0].name;
+                        fetch(`https://api.spotify.com/v1/search?q=${trackName}&type=track&limit=1`, {
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.spotifyKey}` }
+                            })
+                            .then(async (res) => {
+                                let data = await res.json();
+                                if (res.status != 401) {
+                                    console.log(data)
+                                    this.trackImage = data.tracks.items[0].album.images[0].url.toString();
+                                } else {
+                                    // request a new token using client credentials flow
+                                    fetch(`https://accounts.spotify.com/api/token`, {
+                                        headers: { "Content-Type": "application/x-www-form-urlencoded", Authorization: `Basic ${btoa(this.spotifyClientId + ":" + this.spotifyClientSecret)}` },
+                                        body: "grant_type=client_credentials",
+                                        method: "POST"
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        this.spotifyKey = data.access_token;
+                                        return this.getMusicData()
+                                    })
+                                }
+                            })
                         this.musicDataLoaded += 1;
                     })
                 // get albums
@@ -104,6 +196,39 @@
                         this.musicDataLoaded += 1;
                     })
                 console.log(toRaw(this.musicData))
+                // get discogs collection
+                fetch(`https://api.discogs.com/users/carreb/collection/folders/0/releases?token=${process.env.VUE_APP_DISCOGS_TOKEN}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.musicData.collection = data;
+                        console.log(toRaw(this.musicData.collection))
+                        // sort the collection by newest "date_added" field
+                        this.musicData.collection.releases.sort((a, b) => {
+                            let dateA = new Date(a.date_added);
+                            let dateB = new Date(b.date_added);
+                            return dateA - dateB
+                        });
+                        
+                        // generate random numbers for discogs items to display, cannot be the same number, also cannot be the last item in the array
+                        let randomNums = [];
+                        while (randomNums.length < 2) {
+                            let randomNum = Math.floor(Math.random() * this.musicData.collection.releases.length);
+                            if (randomNum != randomNums[0] && randomNum != this.musicData.collection.releases.length - 1) {
+                                randomNums.push(randomNum);
+                            }
+                        }
+
+                        this.randomDiscNumber1 = randomNums[0];
+                        this.randomDiscNumber2 = randomNums[1];
+                        this.musicDataLoaded += 1;
+                    })
+                // get discogs value
+                fetch(`https://api.discogs.com/users/carreb/collection/value?token=${process.env.VUE_APP_DISCOGS_TOKEN}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.musicData.collectionValue = data;
+                        this.musicDataLoaded += 1;
+                    })
             },
         },
         computed: {
@@ -159,9 +284,71 @@
                 return function(obj) {
                     return Object.keys(obj).length === 0;
                 }
+            },
+            getTrackName() {
+                return function(num) {
+                    if (this.musicData.tracks != undefined) {
+                        return this.musicData.tracks.toptracks.track[num].name;
+                    }
+                    return "Loading"
+                }
+            },
+            getTrackArtist() {
+                return function(num) {
+                    if (this.musicData.tracks != undefined) {
+                        return this.musicData.tracks.toptracks.track[num].artist.name;
+                    }
+                    return "Loading"
+                }
+            },
+            getTrackPlays() {
+                return function(num) {
+                    if (this.musicData.tracks != undefined) {
+                        return this.musicData.tracks.toptracks.track[num].playcount;
+                    }
+                    return "Loading"
+                }
+            },
+            reverseArray() {
+                return function(arr) {
+                    return arr.reverse();
+                }
+            },
+            parseDiscogsFormats() {
+                return function(Disc) {
+                    let formats = []
+                    for (let i = 0; i < Disc.formats.length; i++) {
+                        if (Disc.formats[i].name == "Vinyl") {
+                            formats.push(`${Disc.formats[i].qty}x ${Disc.formats[i].descriptions[0]}, ${Disc.formats[i].descriptions[1]}`)
+                            if (Disc.formats[i].text != undefined) {
+                                formats.push(Disc.formats[i].text)
+                            }
+                        }
+                    }
+                    return formats.join(", ")
+                }
+            },
+            getMostExpensiveDisc() {
+                return function() {
+                    if (this.musicData.collection != undefined) {
+                        let mostExpensiveDisc = this.musicData.collection.releases[0];
+                        for (let i = 0; i < this.musicData.collection.releases.length; i++) {
+                            fetch(this.musicData.collection.releases[i].basic_information.resource_url)
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(fetch(mostExpensiveDisc.basic_information.resource_url).then(response => response.json()).then(data => data.lowest_price))
+                                    if (data.lowest_price > fetch(mostExpensiveDisc.basic_information.resource_url).then(response => response.json()).then(data => data.lowest_price)) {
+                                        mostExpensiveDisc = data;
+                                    }
+                                })
+                        }
+                        return mostExpensiveDisc;
+                    }
+                    return "Loading"
+                }
+            },
             }
         }
-    }
 </script>
 
 <style lang="css" scoped>
@@ -185,6 +372,40 @@
     }
     .artists {
         width: 300px;
+    }
+    .discogs-section {
+        width: 300px;
+    }
+
+    .discogs-image {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .discogs-albumname {
+        font-size: 25px;
+        font-weight: 600;
+        position: relative;
+        margin: 0;
+        margin-bottom: 0;
+    }
+
+    .discogs-discinfo {
+        font-size: 20px;
+        font-weight: 400;
+        position: relative;
+        margin-top: 0px;
+        margin-left: 3px;
+        margin-bottom: 2px;
+    }
+    
+    .discogs-year {
+        font-size: 15px;
+        font-weight: 200;
+        position: relative;
+        margin-top: 10px;
+        margin-left: 3px;
     }
 
     .artistImage {
@@ -212,6 +433,12 @@
         position: relative;
         margin: 0;
         margin-bottom: 0;
+    }
+
+    .discogs-value-text {
+        font-size: 15px;
+        text-align: center;
+        font-weight: 600;
     }
 
     .album-artistname {
@@ -244,6 +471,41 @@
         position: relative;
         margin-top: 10px;
         margin-left: 3px;
+    }
+
+    .track-trackname {
+        font-size: 25px;
+        font-weight: 600;
+        position: relative;
+        margin: 0;
+        margin-bottom: 0;
+    }
+
+    .track-artistname {
+        font-size: 20px;
+        font-weight: 400;
+        position: relative;
+        margin-top: 0px;
+        margin-left: 3px;
+        margin-bottom: 2px;
+    }
+
+    .track-plays {
+        font-size: 15px;
+        font-weight: 200;
+        position: relative;
+        margin-top: 10px;
+        margin-left: 3px;
+    }
+
+    .tracks {
+        width: 300px;
+    }
+
+    .trackImage {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
     }
 
     .ryo-pic {
@@ -351,8 +613,40 @@
         position: relative;
         top: 50px;
     }
+    .section5-discogs-collection {
+        width: 80%;
+        margin: auto;
+        left: 0;
+        right: 0;
+        position: relative;
+        top: 50px;
+    }
 
     .recently-ive-been-listening-to {
+        text-align: center;
+    }
+
+    .flex-recent-lastfm-data {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    .flex-discogs-items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+        .section6-projects-bumper {
+        width: 70%;
+        margin: auto;
+        left: 0;
+        right: 0;
+        position: relative;
+        top: 50px;
         text-align: center;
     }
 </style>

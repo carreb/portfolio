@@ -9,10 +9,10 @@
           <p><a class="navbar" @click="this.$router.push('/blog')">blog</a></p>
         </li>
         <li class="nav-item">
-          <p><a class="navbar">projects <font-awesome-icon icon="fa-solid fa-caret-down" /></a></p>
+           <p><a class="navbar" @click="this.$router.push('/projects')">projects <!--<font-awesome-icon icon="fa-solid fa-caret-down" />--></a></p> 
         </li>
         <li class="nav-item">
-          <p><a class="navbar">contact</a></p>
+          <p><a class="navbar" @click="this.$router.push('/contact')">contact</a></p>
         </li>
       </div>
     </ul>
@@ -52,6 +52,10 @@ body {
     margin-left: 0;
     margin-top: 0;
     overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .unselectable {
