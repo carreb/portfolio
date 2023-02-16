@@ -60,8 +60,8 @@
         </div>
     </div>
     <div class="section5-discogs-collection" v-if="musicDataLoaded > 0">
-        <h3 class="sub-subtitle" style="text-align: center;">my vinyl collection</h3>
-        <p class="discogs-value-text" v-if="this.musicData.collectionValue != undefined">{{ this.musicData.collectionValue.minimum.substring(2) }} minimum - {{ this.musicData.collectionValue.median.substring(2) }} median - {{ this.musicData.collectionValue.maximum.substring(2) }} maximum</p>
+        <h3 class="sub-subtitle" style="text-align: center; margin-bottom: 0;">my vinyl collection</h3>
+        <p class="discogs-value-text" v-if="this.musicData.collectionValue != undefined">{{ this.musicData.collection.releases.length }} records<br>{{ this.musicData.collectionValue.minimum.substring(2) }} minimum - {{ this.musicData.collectionValue.median.substring(2) }} median - {{ this.musicData.collectionValue.maximum.substring(2) }} maximum</p>
         <div class="flex-discogs-items">
             <div class="most-recently-added discogs-section" @click="openDiscogs(musicData.collection.releases[musicData.collection.releases.length - 1])" v-tooltip="'click to view on discogs.com'">
                 <h4 class="sub-subtitle music">newest addition</h4>
