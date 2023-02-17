@@ -7,7 +7,7 @@
                     mail: <a href="mailto:caleb@domyjobfor.me" target="__blank">caleb@domyjobfor.me</a><br>
                     github: <a href="https://github.com/carreb" target="__blank">/carreb</a><br>
                     instagram: <a href="https://instagram.com/carreb" target="__blank">@carreb</a><br>
-                    afc related mail: <a href="mailto:caleb@mciafc.com">caleb@mciafc.com</a>
+                    afc & school mail: <a href="mailto:caleb@mciafc.com">caleb@mciafc.com</a>
                 </p>
             </div>
         </div>
