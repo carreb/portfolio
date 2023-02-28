@@ -368,7 +368,7 @@ import ContactPage from './ContactPage.vue'
         }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 
 .top-content-introduction {
         text-align: center;

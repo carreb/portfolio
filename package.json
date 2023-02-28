@@ -13,6 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
+    "buttercms": "^1.2.10",
     "core-js": "^3.8.3",
     "dotenv": "^16.0.3",
     "floating-vue": "^2.0.0-beta.20",

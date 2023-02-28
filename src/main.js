@@ -19,6 +19,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Homepage from "./components/AboutPage.vue";
 import NotFound from "./components/NotFound.vue";
 import BlogPage from "./components/BlogPage.vue";
+import BlogPost from "./components/BlogPost.vue";
 import ContactPage from "./components/ContactPage.vue";
 import ProjectPage from "./components/ProjectsPage.vue";
 
@@ -27,9 +28,10 @@ library.add(faUserSecret, faInstagram, faChalkboardUser, faCaretDown);
 const routes = [
   { path: "/", component: Homepage, name: "home" },
   { path: "/blog", component: BlogPage, name: "blog" },
+  { path: "/blog/:slug", component: BlogPost, name: "blogpost" },
   { path: "/contact", component: ContactPage, name: "contact"},
   { path: "/projects", component: ProjectPage, name: "projects"},
-  { path: "/:pathMatch(.*)*", name: "not-found", component: NotFound },
+  { path: "/:pathMatch(.*)*", name: "not-found", component: NotFound }
 ];
 
 const router = createRouter({
