@@ -39,7 +39,7 @@
                 <img v-if="getAlbumImage(0, musicData) != 'Loading'" :src="getAlbumImage(0, musicData)" alt="">
                 <h5 class="album-albumname">{{ getAlbumName(0, musicData) }}</h5>
                 <h6 class="album-artistname">{{ getAlbumArtist(0, musicData) }}</h6>
-                <h7 class="album-plays">{{ getAlbumPlays(0, musicData) }} plays this week</h7>
+                <h6 class="album-plays">{{ getAlbumPlays(0, musicData) }} plays this week</h6>
             </div>
             <div class="artists unselectable">
                 <h4 class="sub-subtitle music">artist</h4>
@@ -52,7 +52,7 @@
                 <img :src="this.trackImage" class="trackImage">
                 <h5 class="track-trackname">{{ getTrackName(0, musicData) }}</h5>
                 <h6 class="track-artistname">{{ getTrackArtist(0, musicData) }}</h6>
-                <h7 class="track-plays">{{ getTrackPlays(0, musicData) }} plays this week</h7>
+                <h6 class="track-plays">{{ getTrackPlays(0, musicData) }} plays this week</h6>
             </div>
         </div>
         <div v-else>
@@ -68,23 +68,25 @@
                 <img :src="musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[musicData.collection.releases.length - 1].basic_information) }}</h6>
-                <h7 class="discogs-year">Released {{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.year }}</h7>
+                <h6 class="discogs-year">Released {{ musicData.collection.releases[musicData.collection.releases.length - 1].basic_information.year }}</h6>
             </div>
             <div class="random-disc-1 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber1])" v-tooltip="'click to view on discogs.com'">
                 <h4 class="sub-subtitle music">random disc</h4>
                 <img :src="musicData.collection.releases[randomDiscNumber1].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber1].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[randomDiscNumber1].basic_information) }}</h6>
-                <h7 class="discogs-year">Released {{ musicData.collection.releases[randomDiscNumber1].basic_information.year }}</h7>
+                <h6 class="discogs-year">Released {{ musicData.collection.releases[randomDiscNumber1].basic_information.year }}</h6>
             </div>
             <div class="random-disc-2 discogs-section" @click="openDiscogs(musicData.collection.releases[randomDiscNumber2])" v-tooltip="'click to view on discogs.com'">
                 <h4 class="sub-subtitle music">random disc</h4>
                 <img :src="musicData.collection.releases[randomDiscNumber2].basic_information.cover_image" class="discogs-image">
                 <h5 class="discogs-albumname">{{ musicData.collection.releases[randomDiscNumber2].basic_information.title }}</h5>
                 <h6 class="discogs-discinfo">{{ parseDiscogsFormats(musicData.collection.releases[randomDiscNumber2].basic_information) }}</h6>
-                <h7 class="discogs-year">Released {{ musicData.collection.releases[randomDiscNumber2].basic_information.year }}</h7>
+                <h6 class="discogs-year">Released {{ musicData.collection.releases[randomDiscNumber2].basic_information.year }}</h6>
             </div>
         </div>
+        <!-- <br>
+            <p style="font-size: 10px; text-align: center; font-style: italic;">want your own display like this for <a href="https://discogs.com" target="__blank">discogs</a> data? check out my project <a href="https://records.cafe" target="__blank" v-tooltip="`${this.spotifyKey}`">records.cafe</a>! coming soon™</p> -->
     </div>
     <br>
     <br>
