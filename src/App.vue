@@ -79,7 +79,7 @@ html {
   top: 0;
   width: 100%;
   height: 50px;
-  z-index: 100;
+  z-index: 1000000;
 }
 
 .nav-item {
