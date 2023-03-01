@@ -8,17 +8,17 @@
     </div>
     <div class="blog-container">
             <div class="posts-flex-container">
-                <div id="blog-post" class="blog-post" v-for="(post, index) in posts" :key="post.slug + '_' + index">
-                    <router-link :to="'/blog/' + post.slug" >
+                <div id="blog-post" class="blog-post" v-for="(post, index) in posts" :key="post.slug + '_' + index" @click="this.$router.push('/blog/' + post.slug)">
                         <article class="media">
                             <figure>
                                 <img v-if="post.featured_image" :src="post.featured_image" class="featured-image">
                                 <img v-else src="http://via.placeholder.com/250x250" class="featured-image">
                             </figure>
-                            <h2 class="post-title">{{ post.title }}</h2>
-                            <p class="post-title">{{ post.summary }}</p>
+                            <div class="blog-overview-text">
+                                <h2 class="post-title">{{ post.title }}</h2>
+                                <p class="post-title">{{ post.summary }}</p>
+                            </div>
                         </article>
-                    </router-link>
                 </div>
         </div>
     </div>
@@ -64,7 +64,7 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
     align-items: center;
     justify-content: space-between;
     flex-direction: column-reverse;
-    width: 80%;
+    width: 100%;
     gap: 15px;
     flex: 1;
     margin-top: auto;
@@ -83,15 +83,29 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
     height: 250px;
     width: 250px;
     object-fit: cover;
+    float: left;
+    border-radius: 10px;
 }
 
 .blog-post {
     height: fit-content;
     min-height: 0;
+    width: 80%;
     background-color: whitesmoke;
     border-radius: 10px;
-    padding: 10px 10px 2px 15px;
     cursor: pointer;
+    margin: 0;
     transition: all 200ms ease-out;
+    padding-bottom: 10px;
+}
+
+.blog-post:hover {
+    background-color: #FF92A5;
+    color: #FFFFFF
+}
+
+.blog-overview-text {
+    margin-left: 27%;
+    padding-top: 0.5px;
 }
 </style>
