@@ -169,7 +169,7 @@ import ContactPage from './ContactPage.vue'
                         this.musicData.tracks = data;
                         console.log(toRaw(this.musicData.tracks))
                         let trackName = this.musicData.tracks.toptracks.track[0].name;
-                        fetch(`https://api.spotify.com/v1/search?q=${trackName}&type=track&limit=1`, {
+                        fetch(`https://api.spotify.com/v1/search?q=${trackName} ${this.musicData.tracks.toptracks.track[0].artist.name}&type=track&limit=1`, {
                             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.spotifyKey}` }
                             })
                             .then(async (res) => {
@@ -368,7 +368,7 @@ import ContactPage from './ContactPage.vue'
         }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 
 .top-content-introduction {
         text-align: center;
