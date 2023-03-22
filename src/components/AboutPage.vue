@@ -92,6 +92,10 @@
     <br>
     <br>
     <br>
+    <div class="section6-recent-blog-post">
+        <h3 class="subtitle" style="text-align: center;">recent blog post</h3>
+        <RecentBlogPost></RecentBlogPost>
+    </div>
     <ContactPage></ContactPage>
 
 
@@ -99,12 +103,27 @@
     <br>
     <br>
     <br>
+    <footer class="footer">
+        <div class="buttercms">
+            <p>blog related components powered by</p>
+            <a href="https://buttercms.com" target="__blank">
+                <img src="https://cdn.buttercms.com/PGJPyIwaQ2KnOA8UyKfH" alt="Powered by ButterCMS" style="width: 100px;">
+            </a>
+        </div>
+        <div class=github>
+            <p>view source code on</p>
+            <a href="https://github.com/carreb/portfolio" target="__blank">
+                <img src="@/assets/github-mark.svg" alt="github logo" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+    </footer>
 </template>
 
 <script>
 import { toRaw } from 'vue'
 
 import ContactPage from './ContactPage.vue'
+import RecentBlogPost from './RecentBlogPost.vue'
 
     export default {
         name: 'LandingPage',
@@ -124,6 +143,7 @@ import ContactPage from './ContactPage.vue'
         },
         components: {
             ContactPage,
+            RecentBlogPost
         },
         mounted() {
             this.getMusicData();
@@ -667,5 +687,17 @@ import ContactPage from './ContactPage.vue'
         position: relative;
         top: 50px;
         text-align: center;
+    }
+
+    .footer {
+        font-size: 10px;
+        padding: 5px;
+        background-color: whitesmoke;
+        display: flex;
+        gap: 15px;
+        justify-content: left;
+        text-align: center;
+        height: 100px;
+        width: 100%;
     }
 </style>

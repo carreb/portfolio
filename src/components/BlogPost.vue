@@ -2,10 +2,11 @@
     <div id="blog-post" v-if="postLoaded">
         <div class="blog-post-title-information">
             <h1 class="blog-post-title title-huge">{{ post.data.title }}</h1>
+            <!-- <router-link to="/blog">go back</router-link> -->
         </div>
         <div class="blog-post-body" v-html="post.data.body" v-if="postLoaded"></div>
-        <router-link v-if="post.meta.previous_post" class="navbar" :to="'/blog/' + post.meta.previous_post">{{ post.meta.previous_post.title }}</router-link>
-        <router-link v-if="post.meta.next_post" :to="'/blog/' + post.meta.next_post" class="navbar">{{ post.meta.next_post.title }}</router-link>
+        <!-- <router-link v-if="post.meta.previous_post" class="navbar" :to="'/blog/' + post.meta.previous_post.slug">{{ post.meta.previous_post.title }}</router-link>
+        <router-link v-if="post.meta.next_post" :to="'/blog/' + post.meta.next_post.slug" class="navbar">{{ post.meta.next_post.title }}</router-link> -->
     </div>
 </template>
 
@@ -50,6 +51,11 @@ export default {
     left: 0;
     right: 0;
     text-align: center;
+    margin-bottom: 100px;
+}
+
+p>code {
+    background-color: red;
 }
 
 </style>
