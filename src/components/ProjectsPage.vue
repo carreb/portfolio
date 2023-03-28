@@ -1,5 +1,5 @@
 <template>
-    <div class="projectspage">
+    <div class="projectspage" v-if="pageEnabled">
         <h1>select a project type:</h1>
         <div class="flex-options-project-types" v-for="projectType in projectTypes" :key="projectType.key">
             <router-link :to="'/projects/' + projectType.key">
@@ -9,6 +9,9 @@
             </router-link>
         </div>
     </div>
+    <div class="projectspage" v-else>
+        <h1>this page is currently unavailable</h1>
+    </div>
 </template>
 
 <script>
@@ -16,6 +19,7 @@
         name: 'ProjectsPage',
         data() {
             return {
+                pageEnabled: false,
                 projectTypes: [
                     {
                         name: "web",
@@ -28,10 +32,6 @@
                     {
                         name: "film",
                         key: "film"
-                    },
-                    {
-                        name: "music & record collecting",
-                        key: "music"
                     }
                 ]
             }
