@@ -361,6 +361,9 @@ import RecentBlogPost from './RecentBlogPost.vue'
                                 formats.push(Disc.formats[i].text)
                             }
                         }
+                        for (let description = 2; description < Disc.formats[i].descriptions.length; description++) {
+                            formats.push(Disc.formats[i].descriptions[description])
+                        }
                     }
                     return formats.join(", ")
                 }
