@@ -12,6 +12,9 @@
            <p><a class="navbar" @click="this.$router.push('/projects')">projects <!--<font-awesome-icon icon="fa-solid fa-caret-down" />--></a></p> 
         </li>
         <li class="nav-item">
+          <p><a class="navbar" @click="this.$router.push('/comissions')">comissions</a></p>
+        </li>
+        <li class="nav-item">
           <p><a class="navbar" @click="this.$router.push('/contact')">contact</a></p>
         </li>
       </div>
