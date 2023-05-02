@@ -87,7 +87,7 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
                     // get every category from each post
                     let posts = this.posts
                     let categoryAmount = 0
-                    if (posts.length > 0) {
+                    if (posts != undefined) {
                         posts.forEach(post => {
                             post.categories.forEach(postCategory => {
                                 if (postCategory.name == category) {
