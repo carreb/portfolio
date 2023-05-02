@@ -1,7 +1,7 @@
 <template>
     <div class="page-header">
         <h1 class="title-huge blog-title">my blog</h1>
-        <select name="categories" v-model="sortOption" @change="sortPosts()" class="dropdown-sort-menu">
+        <select name="categories" v-model="sortOption" @change="sortPosts()" class="dropdown-sort-menu" v-if="this.posts.length > 0">
             <option value="all">Sort by category</option>
             <option v-for="category in categories" :key="category" :value="category">{{ category }} ({{ countPostsInCategory(category) }})</option>
         </select>
