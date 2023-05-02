@@ -2,11 +2,10 @@
     <div class="top-content-introduction">
         <br>
         <h1 class="title-huge unselectable">hi!</h1>
-        <img src="@/assets/ryo.png" class="ryo-pic">
+        <img src="@/assets/me.png" class="ryo-pic">
         <h3 class="subtitle">overview</h3>
         <p class="main-body-text">
             i'm caleb (they/them). i'm interested in a/v tech, film, music, and web development. i like to collect LPs of my favorite albums.
-            <br>the picture is ryo from bocchi the rock, she is my biggest outfit inspo fr fr
             <br>on this site you will find some widgets relating to a few of my interests, as well as a portfolio of my previous projects in various categories
             <br>there is also a blog section where i write about my interests as well as some of the processes i go through behind my stuff.
         </p>
