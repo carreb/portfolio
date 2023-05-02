@@ -3,7 +3,7 @@
         <h1 class="title-huge blog-title">my blog</h1>
         <select name="categories" v-model="sortOption" @change="sortPosts()" class="dropdown-sort-menu">
             <option value="all">Sort by category</option>
-            <option v-for="category in categories" :key="category" :value="category">{{ category }} ({{ postsInCategoryAmount(category) }})</option>
+            <option v-for="category in categories" :key="category" :value="category">{{ category }} ({{ postsInCategoryAmount(category, this.posts) }})</option>
         </select>
         <br><br><br><br>
         <p class="blog-title-subtext">here you will find a collection of blog posts based on my interests and some of my school work.</p>
@@ -83,9 +83,8 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
         },
         computed: {
             postsInCategoryAmount() {
-                return function(category) {
+                return function(category, posts) {
                     // get every category from each post
-                    let posts = this.posts
                     let categoryAmount = 0
                     if (posts != undefined) {
                         posts.forEach(post => {
