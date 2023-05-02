@@ -14,7 +14,7 @@
     <div class="blog-container">
         <transition name="slide-in" mode="out-in">
             <div class="posts-flex-container">
-                <div id="blog-post" class="blog-post" v-for="(post, index) in sortedPosts.reverse()" :key="post.slug + '_' + index" @click="this.$router.push('/blog/' + post.slug)">
+                <div id="blog-post" class="blog-post" v-for="(post, index) in sortedPosts" :key="post.slug + '_' + index" @click="this.$router.push('/blog/' + post.slug)">
                     <article class="media">
                         <figure>
                             <img v-if="post.featured_image" :src="post.featured_image" class="featured-image">
