@@ -1,7 +1,7 @@
 <template>
     <div class="page-header">
         <h1 class="title-huge blog-title">my blog</h1>
-        <select name="categories" v-model="sortOption" @change="sortPosts()">
+        <select name="categories" v-model="sortOption" @change="sortPosts()" class="dropdown-sort-menu">
             <option value="all">Sort by category</option>
             <option v-for="category in categories" :key="category" :value="category">{{ category }} ({{ postsInCategoryAmount(category) }})</option>
         </select>
@@ -87,13 +87,15 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
                     // get every category from each post
                     let posts = this.posts
                     let categoryAmount = 0
-                    posts.forEach(post => {
-                        post.categories.forEach(postCategory => {
-                            if (postCategory.name == category) {
-                                categoryAmount++
-                            }
+                    if (posts.length > 0) {
+                        posts.forEach(post => {
+                            post.categories.forEach(postCategory => {
+                                if (postCategory.name == category) {
+                                    categoryAmount++
+                                }
+                            })
                         })
-                    })
+                    }
                     return categoryAmount
                 }
             },
@@ -102,6 +104,7 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
 </script>
 
 <style scoped>
+
 .empty-posts {
     text-align: center;
 }
