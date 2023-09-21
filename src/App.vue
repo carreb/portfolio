@@ -17,6 +17,9 @@
         <li class="nav-item">
           <p><a class="navbar" @click="this.$router.push('/contact')">contact</a></p>
         </li>
+        <li class="nav-item">
+          <p><a class="navbar" href="https://garden.domyjobfor.me">garden</a></p>
+        </li>
       </div>
     </ul>
     <div class="dropdown projects" v-if="dropdownVisible == 'projects'">
