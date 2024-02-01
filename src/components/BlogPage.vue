@@ -46,7 +46,8 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
                 let posts = res.data.data
                 posts.forEach(post => {
                     post.categories.forEach(category => {
-                        if (!this.categories.includes(category.name)) {
+                        // do not add the category if it already exists or if it has the category of portfolio
+                        if (!this.categories.includes(category.name) && category.name != "portfolio") {
                             this.categories.push(category.name)
                         }
                     })
@@ -65,7 +66,15 @@ const butter = Butter(process.env.VUE_APP_BUTTERCMS_KEY)
         methods: {
             sortPosts() {
                     if (this.sortOption == "all") {
-                        this.sortedPosts = this.posts
+                        // remove all posts that have the tag portfolio from this.posts
+                        this.sortedPosts = this.posts.filter(post => {
+                            let categories = post.categories
+                            let categoryNames = []
+                            categories.forEach(category => {
+                                categoryNames.push(category.name)
+                            })
+                            return !categoryNames.includes("portfolio")
+                        })
                     } else {
                         // the posts have multiple categories
                         // they are formatted in objects
