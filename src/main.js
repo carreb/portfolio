@@ -22,6 +22,7 @@ import BlogPage from "./components/BlogPage.vue";
 import BlogPost from "./components/BlogPost.vue";
 import ContactPage from "./components/ContactPage.vue";
 import ProjectPage from "./components/ProjectsPage.vue";
+import ProjectPost from "./components/PortfolioPost.vue";
 
 library.add(faUserSecret, faInstagram, faChalkboardUser, faCaretDown);
 
@@ -31,6 +32,7 @@ const routes = [
   { path: "/blog/:slug", component: BlogPost, name: "blogpost" },
   { path: "/contact", component: ContactPage, name: "contact"},
   { path: "/projects", component: ProjectPage, name: "projects"},
+  { path: "/projects/:slug", component:  ProjectPost, name: "projectpost"},
   { path: "/:pathMatch(.*)*", name: "not-found", component: NotFound }
 ];
 
