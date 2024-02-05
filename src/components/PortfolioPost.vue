@@ -2,7 +2,7 @@
     <div id="blog-post" v-if="postLoaded">
         <div class="blog-post-title-information">
             <h1 class="blog-post-title title-huge">{{ post.data.title }}</h1>
-            <h2 class="subtitle">Event Ran on {{ parseDate(post.data.published) }}</h2>
+            <h2 class="subtitle-portfolio">Event Ran on {{ parseDate(post.data.published) }}</h2>
             <!-- <router-link to="/blog">go back</router-link> -->
         </div>
         <div class="blog-post-body" v-html="post.data.body" v-if="postLoaded"></div>
@@ -68,14 +68,10 @@ export default {
     margin-bottom: 100px;
 }
 
-.subtitle {
+.subtitle-portfolio {
     margin-top: -30px;
     font-weight: 200;
     font-size: 1rem;
-}
-
-p>code {
-    background-color: red;
 }
 
 .image-gallery {
