@@ -53,13 +53,14 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
+/* Styles here are GLOBAL unless overriden. Be careful what you name them */
 .blog-post-title-information {
     text-align: center;
 }
 
 .blog-post-body {
-    width: 60%;
+    width: 80%;
     margin: auto;
     left: 0;
     right: 0;
@@ -76,4 +77,37 @@ export default {
 p>code {
     background-color: red;
 }
+
+.image-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: default;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.image-gallery > figure > img {
+    margin: 0;
+    padding: 0;
+    width: 500px;
+    height: 300px;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+
+.image-gallery > figure {
+    padding: 0;
+    margin: 0;
+}
+
+figcaption {
+    font-style: italic;
+    color: #666;
+}
+
 </style>
