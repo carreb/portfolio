@@ -15,19 +15,15 @@
             <p class="body-text-section2">
                 <span class="subtitle">more about me</span><br><br>
                 i'm {{ new Date().getFullYear() - 2006 }} years old and am currently
-                a student at martingrove collegiate institute. at mci i am a co-president for the <a
-                    href="https://mciafc.com" target="__blank" v-tooltip="'the afc website! i made that! wow!'">afc</a> and i typically take the role
-                of stage manager during productions.
+                a 1st year student at toronto metropolitan university for performance production. i'm interested in getting into
+                production management and technical direction.
             </p>
         </div>
     </div>
     <div class="section3-music">
         <h3 class="subtitle">music</h3>
         <p class="music-section-intro-text">
-            i've been in love with music ever since i was a little kid, the <a href="https://trans-siberian.com" target="__blank" v-tooltip="'their website'">trans-siberian orchestra</a> started playing on the tv and i was absolutely jamming out to it.
-            my parents checked them out, saw that they were touring in toronto soon, and we went. we've been going to their shows every year since.
-            we've gotten to know some of the band members too, which is pretty cool. i have a pretty big collection of drumsticks from the east-side drummer <a href="https://en.wikipedia.org/wiki/Jeff_Plate" target="__blank" v-tooltip="'click to view on wikipedia.org'">jeff plate</a>.
-            that's all to say that i've been a music lover ever since i was a kid. the next portion of the website will be dedicated to my current favorite albums, artists, and tracks, as well as my lp collection.
+            here's some of my current favorite music! and some stuff from my record collection! :D
         </p>
     </div>
     <div v-if="musicDataLoaded > 0" class="section4-music-liveapi">
