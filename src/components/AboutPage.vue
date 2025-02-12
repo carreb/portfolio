@@ -622,7 +622,7 @@ import RecentBlogPost from './RecentBlogPost.vue'
     }
 
     .body-text-section2 {
-        font-size: 21px;
+        font-size: 19px;
         height: 100%;
         line-height: 1.25;
         padding: 0;
